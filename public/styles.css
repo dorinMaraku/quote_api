@@ -65,3 +65,13 @@ button:hover {
 .quote-text {
   font-style: italic;
 }
+
+.attribution {
+  display: flex;
+  align-items: baseline;
+}
+
+.year {
+  font-style: italic;
+  font-size: .85rem;
+}

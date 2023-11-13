@@ -24,7 +24,7 @@ const renderQuotes = (quotes = []) => {
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
       newQuote.innerHTML = `<div class="quote-text" id="${quote.id}">${quote.quote}</div>
-      <div class="attribution">- ${quote.person}</div>`;
+      <div class="attribution">- ${quote.person} - <div class="year"> &nbsp;${quote.year}</div></div>`;
       quoteContainer.appendChild(newQuote);
     });
   } else {
