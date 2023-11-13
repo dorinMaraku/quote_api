@@ -52,21 +52,33 @@ app.post('/api/quotes', (req, res) => {
 })
 
 app.put('/api/quotes/:id', (req, res) => {
-    console.log(req.params.id)
-    const findQuote = quotes.filter(q => q.id === req.params.id)
-    console.log(findQuote)
-    const quoteIndex = quotes.findIndex((quote) => quote.id === req.params.id)
-    console.log(quoteIndex)
-    const foundQuote = quotes[quoteIndex]
-    console.log(foundQuote)
+    const quoteIndex = quotes.findIndex(quote => quote.id === req.params.id)
+    let foundQuote = quotes[quoteIndex]
     
     if (!foundQuote) {
         res.status(404).send()
     } else {
-        foundQuote.quote = req.query.quote
-        foundQuote.person = req.query.person
+        foundQuote = {...foundQuote,
+            quote: req.query.quote, 
+            person: req.query.person
+        }
+        // console.log(foundQuote)
         res.status(200).json({quote: foundQuote})
     }
 })
 
-app.listen(PORT, () => console.log(`listeting on port ${PORT}`));
+app.delete('/api/quotes/:id', (req, res) => {
+    const quoteIndex = quotes.findIndex(quote => quote.id === req.params.id)
+    let foundQuote = quotes[quoteIndex]
+    
+    if (!foundQuote) {
+        res.status(404).send()
+    } else {
+        // const newQuotes = quotes.filter(quote => quote !== foundQuote) 
+        quotes.splice(quoteIndex, 1)
+        res.status(200).json({quote: foundQuote})
+    }
+    // console.log(quotes)
+})
+
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
